@@ -1,12 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-/*
- * #include <dirent.h>
- * #include <signal.h>
- * #include <fcntl.h>
- * #include <string.h>
- */
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -14,13 +8,6 @@
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-
- /* global variable */
-extern char **environ;
-
-/* macro */
-#define MAX_SPACE 1024
-#define BUFFER_SIZE 1024
 
 /* built structures */
 /**
@@ -88,5 +75,12 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 
 /* custom unistd.h */
 pid_t _getppid(void);
+
+/* global variable */
+extern char **environ;
+
+/* macro */
+#define MAX_SPACE 1024
+#define BUFFER_SIZE 1024
 
 #endif /* MAIN_H */

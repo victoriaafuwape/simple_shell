@@ -121,7 +121,6 @@ char **tokenize_input(char *input)
 		i++;
 		if (i >= MAX_SPACE)
 		{
-			free(argv);
 			return (NULL);
 		}
 		token = _strtok(NULL, delimiter);
