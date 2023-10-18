@@ -26,5 +26,5 @@ int _unsetenv(const char *name)
 			return (0);
 		}
 	}
-	return(-1);
+	return (-1);
 }
