@@ -102,6 +102,7 @@ void execute_line(ShellContext *pInfo)
 {
 	char *cmd_path;
 	int i = 0;
+	int exit_status = 0;
 
 	while (pInfo->args[i] != NULL)
 	{
