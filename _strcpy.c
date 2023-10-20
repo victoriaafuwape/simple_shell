@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * _strcpy - Copies the string pointed to by the source string.
@@ -18,6 +18,8 @@ char *_strcpy(char *dest, const char *src)
 		dest++;
 		src++;
 	}
+
 	*dest = '\0';
+
 	return (mainDest);
 }

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * _strlen - Gets the length of a string.
@@ -14,5 +14,6 @@ size_t _strlen(const char *s)
 	{
 		length++;
 	}
+
 	return (length);
 }

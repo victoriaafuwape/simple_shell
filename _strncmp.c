@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * _strncmp - Compares the first n characters of the two strings s1 and s2.
@@ -13,14 +13,19 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 	while (n > 0)
 	{
 		if (*s1 != *s2)
+		{
 			return (*s1 - *s2);
+		}
 
-	if (*s1 == '\0')
-		return (0);
+		if (*s1 == '\0')
+		{
+			return (0);
+		}
 
-	s1++;
-	s2++;
-	n--;
+		s1++;
+		s2++;
+		n--;
 	}
+
 	return (0);
 }
