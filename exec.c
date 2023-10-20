@@ -25,9 +25,10 @@ char *prepare_command(ShellContext *pInfo, char **current_args)
 		return (NULL);
 	}
 
-	if (current_args[0][0] == '/')
+	if (current_args[0][0] == '/' || (current_args[0][0] ==
+					  '.' && current_args[0][1] == '/'))
 	{
-		cmd_path = malloc(strlen(current_args[0]) + 1);
+		cmd_path = malloc(_strlen(current_args[0]) + 1);
 		if (cmd_path == NULL)
 		{
 			error_printer("malloc", pInfo);
