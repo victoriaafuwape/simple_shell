@@ -8,6 +8,7 @@
  *
  * Return: An integer value based on the comparison.
  */
+
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
 	while (n > 0)
