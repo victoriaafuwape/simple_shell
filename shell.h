@@ -35,7 +35,7 @@ typedef struct shell_context
 	int eof_reached;
 	int line_number;
 	char *line;
-	char **args;
+	char ***args;
 } ShellContext;
 
  /* global variable */
@@ -49,8 +49,8 @@ int count_tokens(char *str, const char *delim, ShellContext *pInfo);
 void parse_line(ShellContext *pInfo);
 
 /* exec.c */
-char *prepare_command(ShellContext *pInfo);
-void fork_and_execute(ShellContext *pInfo, char *cmd_path);
+char *prepare_command(ShellContext *pInfo, char **current_args);
+void fork_and_execute(ShellContext *pInfo, char *cmd_path, char **current_args);
 void execute_line(ShellContext *pInfo);
 
 /* main.c */

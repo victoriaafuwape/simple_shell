@@ -28,18 +28,26 @@ void signal_handler(int signum)
  */
 void clean_up(ShellContext *pInfo)
 {
-	if (pInfo->args)
-	{
-		free(pInfo->args);
-		pInfo->args = NULL;
-	}
+    int i = 0;
 
-	if (pInfo->line)
-	{
-		free(pInfo->line);
-		pInfo->line = NULL;
-	}
+    if (pInfo->args)
+    {
+        while (pInfo->args[i] != NULL)
+        {
+            free(pInfo->args[i]);
+            i++;
+        }
+        free(pInfo->args);
+        pInfo->args = NULL;
+    }
+
+    if (pInfo->line)
+    {
+        free(pInfo->line);
+        pInfo->line = NULL;
+    }
 }
+
 
 /**
  * error_printer - Print an error message to the standard error.
