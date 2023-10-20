@@ -60,6 +60,7 @@ void handle_noninteractive_mode(ShellContext *pInfo)
  * Return:
  *   Always returns 0 upon successful execution.
  */
+
 int main(int argc __attribute__((unused)), char **argv)
 {
 	ShellContext Info = {NULL};
