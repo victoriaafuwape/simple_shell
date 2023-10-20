@@ -49,6 +49,7 @@ int count_tokens(char *str, const char *delim, ShellContext *pInfo);
 void parse_line(ShellContext *pInfo);
 
 /* exec.c */
+char *relative_path(char **current_args, ShellContext *pInfo);
 char *prepare_command(ShellContext *pInfo, char **current_args);
 void fork_and_execute(ShellContext *pInfo, char *cmd_path, char **curr_args);
 void execute_line(ShellContext *pInfo);

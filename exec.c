@@ -1,6 +1,40 @@
 #include "shell.h"
 
 /**
+ * execute_relative_path - Get the abs path of a command given a rel path.
+ * @current_args: An array containing the command and its arguments.
+ * @pInfo: Pointer to the ShellContext struct.
+ *
+ * Return: A pointer to the absolute path of the command.
+ */
+char *relative_path(char **current_args, ShellContext *pInfo)
+{
+	char *cwd = getcwd(NULL, 0);
+	char *cmd_path;
+
+	if (cwd == NULL)
+	{
+		error_printer("getcwd", pInfo);
+		clean_up(pInfo);
+		exit(1);
+	}
+
+	cmd_path = malloc(_strlen(cwd) + _strlen(current_args[0]) + 2);
+	if (cmd_path == NULL)
+	{
+		error_printer("malloc", pInfo);
+		clean_up(pInfo);
+		exit(1);
+	}
+	_strcpy(cmd_path, cwd);
+	_strcat(cmd_path, "/");
+	_strcat(cmd_path, current_args[0]);
+	free(cwd);
+
+	return (cmd_path);
+}
+
+/**
  * prepare_command - Prepare the full path of the command to execute.
  * @pInfo: Pointer to the ShellContext structure.
  * @current_args: A double pointer.
@@ -36,6 +70,16 @@ char *prepare_command(ShellContext *pInfo, char **current_args)
 			exit(1);
 		}
 		_strcpy(cmd_path, current_args[0]);
+	}
+	else if (_strncmp(current_args[0], "./", 2) == 0)
+	{
+		cmd_path = relative_path(current_args, pInfo);
+		if (cmd_path == NULL)
+		{
+			error_printer(current_args[0], pInfo);
+			clean_up(pInfo);
+			return (NULL);
+		}
 	}
 	else
 	{
