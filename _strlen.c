@@ -6,6 +6,7 @@
  *
  * Return: The length of the string.
  */
+
 size_t _strlen(const char *s)
 {
 	size_t length = 0;
