@@ -17,6 +17,7 @@ void signal_handler(int signum)
 	}
 }
 
+
 /**
  * clean_up - Perform cleanup operations.
  * @pInfo: Pointer to the shell context.
@@ -47,7 +48,6 @@ void clean_up(ShellContext *pInfo)
 		pInfo->line = NULL;
 	}
 }
-
 
 /**
  * error_printer - Print an error message to the standard error.
