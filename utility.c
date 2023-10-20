@@ -28,24 +28,24 @@ void signal_handler(int signum)
  */
 void clean_up(ShellContext *pInfo)
 {
-    int i = 0;
+	int i = 0;
 
-    if (pInfo->args)
-    {
-        while (pInfo->args[i] != NULL)
-        {
-            free(pInfo->args[i]);
-            i++;
-        }
-        free(pInfo->args);
-        pInfo->args = NULL;
-    }
+	if (pInfo->args)
+	{
+		while (pInfo->args[i] != NULL)
+		{
+			free(pInfo->args[i]);
+			i++;
+		}
+		free(pInfo->args);
+		pInfo->args = NULL;
+	}
 
-    if (pInfo->line)
-    {
-        free(pInfo->line);
-        pInfo->line = NULL;
-    }
+	if (pInfo->line)
+	{
+		free(pInfo->line);
+		pInfo->line = NULL;
+	}
 }
 
 
