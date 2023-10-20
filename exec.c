@@ -106,6 +106,16 @@ void execute_line(ShellContext *pInfo)
 	while (pInfo->args[i] != NULL)
 	{
 		pInfo->line_number++;
+
+		if (_strncmp(pInfo->args[i][0], "exit", 4) == 0)
+		{
+			if (pInfo->args[i][1] != NULL)
+			{
+				exit_status = _atoi(pInfo->args[i][1]);
+			}
+			clean_up(pInfo);
+			exit(exit_status);
+		}
 		cmd_path = prepare_command(pInfo, pInfo->args[i]);
 		if (cmd_path == NULL)
 		{
