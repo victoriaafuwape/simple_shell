@@ -19,6 +19,7 @@ void signal_handler(int signum)
 
 /**
  * clean_up - Perform cleanup operations.
+ * @pInfo: Pointer to the shell context.
  *
  * Description:
  *   This function performs cleanup operations by freeing dynamically allocated
@@ -43,6 +44,7 @@ void clean_up(ShellContext *pInfo)
 /**
  * error_printer - Print an error message to the standard error.
  * @cmd_name: The name of the command that caused the error.
+ * @pInfo: Pointer to the shell context.
  *
  * Description:
  *   This function prints an error message to the standard error (stderr).

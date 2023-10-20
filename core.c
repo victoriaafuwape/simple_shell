@@ -2,6 +2,7 @@
 
 /**
  * read_line - Read a line of input from stdin.
+ * @pInfo: Pointer to the shell context.
  *
  * Description:
  *   This function reads a line of input from the standard input (stdin)
@@ -31,6 +32,7 @@ void read_line(ShellContext *pInfo)
  * count_tokens - Count the number of tokens in a string.
  * @str: The input string to be tokenized.
  * @delim: The delimiter used to tokenize the string.
+ * @pInfo: Pointer to the shell context.
  *
  * Description:
  *   This function counts the number of tokens in the 'str' string,
@@ -70,6 +72,7 @@ int count_tokens(char *str, const char *delim, ShellContext *pInfo)
 
 /**
  * parse_line - Parse the line into tokens and store them in pInfo->args.
+ * @pInfo: Pointer to the shell context.
  *
  * Description:
  *   This function parses the line stored in 'pInfo->line' into tokens using
@@ -100,68 +103,4 @@ void parse_line(ShellContext *pInfo)
 	}
 
 	pInfo->args[i] = NULL;
-}
-
-/**
- * execute_line - Execute the command stored in pInfo->args.
- *
- * Description:
- *   This function forks a child process to execute the command stored
- *   in 'pInfo->args'. It checks for NULL or empty strings in 'pInfo->args'
- *   and handles errors during forking or execution.  It also waits for the
- *   child process to complete and cleans up allocated memory.
- */
-void execute_line(ShellContext *pInfo)
-{
-	pid_t pid;
-	char *cmd_path;
-
-	if (pInfo->args == NULL || pInfo->args[0] == NULL)
-	{
-		clean_up(pInfo);
-		return;
-	}
-	if (pInfo->args[0][0] == '/')
-	{
-		cmd_path = malloc(strlen(pInfo->args[0]) + 1);
-		if (cmd_path == NULL)
-		{
-			error_printer("malloc", pInfo);
-			clean_up(pInfo);
-			exit(1);
-		}
-		strcpy(cmd_path, pInfo->args[0]);
-	}
-	else
-	{
-		cmd_path = get_cmd_path(pInfo->args[0]);
-		if (cmd_path == NULL)
-		{
-			error_printer("Command not found", pInfo);
-			clean_up(pInfo);
-			return;
-		}
-	}
-	pid = fork();
-	if (pid == 0)
-	{
-		if (execve(cmd_path, pInfo->args, NULL) == -1)
-		{
-			error_printer(cmd_path, pInfo);
-			clean_up(pInfo);
-			exit(0);
-		}
-	}
-	else if (pid < 0)
-	{
-		error_printer("fork", pInfo);
-		clean_up(pInfo);
-		exit(1);
-	}
-	else
-	{
-		wait(NULL);
-	}
-	clean_up(pInfo);
-	free(cmd_path);
 }

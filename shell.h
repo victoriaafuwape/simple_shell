@@ -1,4 +1,5 @@
-#ifndef MAIN_H
+#ifndef SHELL_H
+#define SHELL_H
 
 /* standard libraries */
 #include <stdio.h>
@@ -13,11 +14,20 @@
 
 /* data structures */
 /**
- * struct ShellContext - Structure to hold shell context information.
- * @shell_name: Pointer to the name of the shell.
+ * struct shell_context - Structure to hold context information for the shell.
+ * @program_name: The name of the shell program.
+ * @eof_reached: Flag indicating if end-of-file (EOF) has been reached.
+ * @line_number: The current line number in the shell's input.
+ * @line: A dynamically allocated string to store user input.
+ * @args: An array of strings representing parsed command arguments.
  *
  * Description:
  *   This structure is used to hold context information for the shell program.
+ *   It includes fields for the program name, a flag to indicate whether
+ *   EOF has been reached, the current line number in the shell's input,
+ *   a dynmically allocated string for user input, and an array of strings for
+ *   parsed command arguments. It is used to maintain state and pass relevant
+ *   data between shell functions.
  */
 typedef struct shell_context
 {
@@ -37,9 +47,18 @@ extern ShellContext *pInfo;
 void read_line(ShellContext *pInfo);
 int count_tokens(char *str, const char *delim, ShellContext *pInfo);
 void parse_line(ShellContext *pInfo);
+
+/* exec.c */
+char *prepare_command(ShellContext *pInfo);
+void fork_and_execute(ShellContext *pInfo, char *cmd_path);
 void execute_line(ShellContext *pInfo);
 
+/* main.c */
+void handle_interactive_mode(ShellContext *pInfo);
+void handle_noninteractive_mode(ShellContext *pInfo);
+
 /* path.c */
+char **get_env_token(void);
 char *get_cmd_path(const char *cmd);
 
 /* utility.c */
@@ -67,4 +86,4 @@ int _strncmp(const char *s1, const char *s2, size_t n);
 /* unistd.h */
 pid_t _getppid(void);
 
-#endif /* MAIN_H */
+#endif /* SHELL_H */
